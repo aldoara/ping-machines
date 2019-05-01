@@ -1,4 +1,17 @@
-# Name: Ping-Machines
+# Script Name: Ping-Machines
+#
+# This script pings multiple servers sequentially.
+#
+# Input: C:\Temp\MyScript\hosts.txt
+# Output: C:\Temp\MyScript\PingResults.txt
+#
+# One host per line must be in Input file. IP address, hostname and FQDN are accepted.
+#
+# Modified by: Aldo Antonio Ramírez Arellano (aldo-antonio.ramirez@atos.net)
+#
+# It includes the count of servers to ping and a progress bar with percentage.
+# Note: For a long list of servers to ping, please remove the sleep time included at the end of PingMachines function.
+#
 Write-Host "Script is running" -ForegroundColor Cyan -BackgroundColor Black
 
 $Hosts = Get-Content 'C:\Temp\MyScript\hosts.txt' # Source list of devices to ping
@@ -24,7 +37,6 @@ function PingMachines { # Function starts
            
         Write-Progress -Activity "Pinging server $i of $totalServers" -Status "$("{0:N2}" -f (($percentComplete),2))% Complete" -PercentComplete $percentComplete
         sleep 1    # to be able to actually see the progress when there are few servers ;)
-
     }
 }
 
